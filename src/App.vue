@@ -2,21 +2,17 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-  
-      <a href="/#/signup"> | Signup</a>
-      <a href="/#/login"> | Login</a>
-      <a href="/#/logout"> | Logout</a>
-      
+
+      <a href="/#/signup"> | Signup</a> <a href="/#/login"> | Login</a> <a href="/#/logout"> | Logout</a>
+      <a href="/#/OnlineShopping"> | Shop Online</a>
     </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <style>
-
-
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -35,5 +31,3 @@
   color: #42b983;
 }
 </style>
-
-

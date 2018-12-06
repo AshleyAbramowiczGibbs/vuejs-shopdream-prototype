@@ -28,13 +28,21 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <h1>Add Your Tags to Find Your Items</h1>
+
+          <!--
+            <div><img src="style.image_url" /></div>
+            <p>{{ style.item_tags }}</p>
+          -->
           <form>
-            <input type="text" name="item_tagOne" /> Item Tag <br />
-            <input type="text" name="item_tagTwo" /> Item Tag<br />
-            <input type="text" name="item_tagThree" /> Item Tag<br />
-            <input type="text" name="item_tagFour" /> Item Tag<br />
-            <input type="text" name="item_tagFive" /> Item Tag<br />
+            <input v-model="newItemTag" type="text" /> Item Tag<br />
+            <!--
+              <input v-model="newItemTag" type="text" /> Item Tag<br />
+              <input v-model="newItemTag" type="text" /> Item Tag<br />
+              <input v-model="newItemTag" type="text" /> Item Tag<br />
+              <input v-model="newItemTag" type="text" /> Item Tag<br />
+            -->
             <button v-on:click="createItemTag();" class="btn btn-primary">Search for your Items</button>
+            <a href="'/#/styles/' + style.id" class="btn btn-primary">Go somewhere</a>
           </form>
         </div>
       </div>
@@ -52,7 +60,10 @@ export default {
       message: "Welcome to Shop.Dream!",
       styles: [],
       newStyle: {},
-      newStyleImage: ""
+      newStyleImage: "",
+      itemTags: [],
+      user_id: 0,
+      style_id: 0
     };
   },
   created: function() {
@@ -65,21 +76,21 @@ export default {
   },
   methods: {
     showStyle: function(style) {
-      console.log("show infor about this", style);
+      this.newStyle = style;
     },
     createItemTag: function() {
       let params = {
         name: this.newItemTag,
-        user_id: 1,
-        style_id: 1
+        user_id: this.user_id,
+        style_id: this.style_id
       };
       axios
-        .post("http://localhost:3000/api/styles", params)
+        .post("http://localhost:3000/api/item_tags", params)
         .then(
           function(response) {
             console.log(response);
-            this.styles.push(response.data);
-            this.newStyleImage = "";
+            this.itemTags.push(response.data);
+            this.newItemTag = "";
           }.bind(this)
         )
         .catch(
