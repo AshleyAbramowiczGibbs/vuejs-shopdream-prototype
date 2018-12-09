@@ -3,7 +3,7 @@
     <div class="container">
       <a href="/#/">Back to Your Styles</a>
       <h1>Style info</h1>
-      <img v-bind:src="style.image_url" />
+      <img class="resize" v-bind:src="style.image_url" />
 
       <div v-for="item_tag in style.item_tags">
         <!-- Button trigger modal -->
@@ -19,7 +19,7 @@
           </button>
           <br />
           <button
-            v-on:click="searchNearbyAPI(item_tag);"
+            v-on:click="searchNearbyAPI(item_tag), setMapMarkers(stores);"
             type="button"
             class="btn btn-primary"
             data-toggle="modal"
@@ -105,13 +105,13 @@
             </button>
           </div>
           <div class="modal-body">
-            <div id="map"></div>
             <div>I want to show all the items from the nearby API here</div>
 
             <div class="modal-body">
+              <span><div id="map"></div></span>
               <div v-for="store in stores" v-bind:key="store.id">
                 <div class="card">
-                  <img class="card-img-top" v-bind:src="store.products[0].image" alt="Card image cap" />
+                  <img class="small" v-bind:src="store.products[0].image" alt="Card image cap" />
                   <div class="card-body">
                     <p class="card-title">{{ store.name }}</p>
                     <p>{{ store.products[0].title }}</p>
@@ -132,8 +132,17 @@
 
 <style>
 #map {
-  height: 400px;
+  height: 800px;
   width: 100%;
+}
+
+img.resize {
+  max-width: 300px;
+}
+
+img.small {
+  width: 50%;
+  height: 300px;
 }
 </style>
 
@@ -174,7 +183,8 @@ export default {
   },
   mounted: function() {
     mapboxgl.accessToken =
-      "pk.eyJ1IjoiYXNobGV5YWJyYW1vMiIsImEiOiJjam96MWthbG8ycDk5M2ttbzlxeGF2bjRpIn0.sWcXeBu7CQ3vipEFwj8wcA";
+      "pk.eyJ1IjoiYXNobGV5YWJyYW1vMiIsImEiOiJjanBoYzhkZXkwYzhnM2tqc2I1aGtjMWdhIn0.Qxaxlrd5QPSxZ9wn_WhE_Q";
+    // process.env.VUE_APP_MAPBOX_KEY;
     var map = new mapboxgl.Map({
       container: "map", // container id
       style: "mapbox://styles/mapbox/streets-v9", // stylesheet location
@@ -234,6 +244,19 @@ export default {
             this.errors = error.response.data.errors;
           }.bind(this)
         );
+    },
+    setMapMarkers: function(stores) {
+      console.log(stores);
+      this.current_stores = stores;
+      let params = {
+        lat: stores.locations.lat,
+        lng: stores.locations.lng
+      };
+      axios.get("http://localhost:3000/api/nearby", { params: params }).then(
+        function(response) {
+          this.stores = response.data;
+        }.bind(this)
+      );
     }
   },
   computed: {}

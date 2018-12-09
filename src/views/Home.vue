@@ -12,7 +12,7 @@
     </form>
 
     <div v-for="style in styles">
-      <img v-bind:src="style.image_url" />
+      <img class="medium" v-bind:src="style.image_url" />
       <p>url: {{ style.image_url }}</p>
       <button
         v-on:click="setCurrentStyle(style);"
@@ -58,7 +58,12 @@
   </div>
 </template>
 
-<style></style>
+<style>
+img.medium {
+  width: 380px;
+  height: 530px;
+}
+</style>
 
 <script>
 let axios = require("axios");
@@ -94,12 +99,17 @@ export default {
       }
     },
     submit: function() {
-      var formData = new FormData();
-      formData.append("image", this.image);
+      let params = {
+        image_url: this.image
+      };
 
-      axios.post("http://localhost:3000/api/styles", formData).then(response => {
-        this.$refs.fileInput.value = "";
-      });
+      axios.post("http://localhost:3000/api/styles", params).then(
+        function(response) {
+          console.log(response);
+          this.styles.push(response.data);
+          this.$refs.fileInput.value = "";
+        }.bind(this)
+      );
     },
     createItemTag: function() {
       let params = {
@@ -129,8 +139,7 @@ export default {
     },
     createStyle: function() {
       let params = {
-        image_url: this.newStyleImage,
-        user_id: 1
+        image_url: this.newStyleImage
       };
       axios
         .post("http://localhost:3000/api/styles", params)
