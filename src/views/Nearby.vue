@@ -1,9 +1,10 @@
 <template>
   <div class="about">
     <h1>Find the Style Nearby</h1>
-
-    {{ products }}
     <div id="map"></div>
+
+    <p>{{ stores.locations[0].lng }}</p>
+    <p>{{ stores.locations[0].lng }}</p>
   </div>
 </template>
 
@@ -20,13 +21,19 @@ body {
 
 <script>
 export default {
+  data: function() {
+    return {
+      lat: 0,
+      lng: 0
+    };
+  },
   mounted: function() {
     mapboxgl.accessToken =
-      "pk.eyJ1IjoicGV0ZXJ4amFuZyIsImEiOiJjam94YWZieXExYnQ0M3BucXZwbmV2Y2VsIn0.pmLbX0YPw86c5r8YlyZr7w";
+      "pk.eyJ1IjoiYXNobGV5YWJyYW1vMiIsImEiOiJjam96MWthbG8ycDk5M2ttbzlxeGF2bjRpIn0.sWcXeBu7CQ3vipEFwj8wcA";
     var map = new mapboxgl.Map({
       container: "map", // container id
       style: "mapbox://styles/mapbox/streets-v9", // stylesheet location
-      center: [-74.5, 40], // starting position [lng, lat]
+      center: [lat, lng], // starting position [lng, lat]
       zoom: 11 // starting zoom
     });
   }

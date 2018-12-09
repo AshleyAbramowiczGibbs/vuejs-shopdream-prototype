@@ -112,6 +112,7 @@
                   <div class="card-body">
                     <p class="card-title">{{ store.name }}</p>
                     <p>{{ store.products[0].title }}</p>
+                    <p>{{ store.locations[0].phone }}</p>
                   </div>
                 </div>
               </div>
