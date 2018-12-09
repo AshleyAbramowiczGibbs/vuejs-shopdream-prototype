@@ -12,10 +12,10 @@
     </form>
 
     <div v-for="style in styles">
-      <img v-bind:src="style.image_url" /> <span v-on:click="style_id = style.id;"></span>
+      <img v-bind:src="style.image_url" />
       <p>url: {{ style.image_url }}</p>
       <button
-        v-on:click="showStyle(style);"
+        v-on:click="setCurrentStyle(style);"
         type="button"
         class="btn btn-primary"
         data-toggle="modal"
@@ -35,11 +35,14 @@
         <div class="modal-content">
           <h1>Add Your Tags to Find Your Items</h1>
 
+          <ul>
+            <li class="text-danger" v-for="error in errors">{{ error }}</li>
+          </ul>
           <!--
             <div><img src="style.image_url" /></div>
             <p>{{ style.item_tags }}</p>
           -->
-          <form>
+          <form v-on:submit.prevent="createItemTag();">
             <input v-model="newItemTag" type="text" /> Item Tag<br />
             <!--
               <input v-model="newItemTag" type="text" /> Item Tag<br />
@@ -47,7 +50,7 @@
               <input v-model="newItemTag" type="text" /> Item Tag<br />
               <input v-model="newItemTag" type="text" /> Item Tag<br />
             -->
-            <button v-on:click="createItemTag();" class="btn btn-primary">Search for your Items</button>
+            <button type="submit" class="btn btn-primary">Search for your Items</button>
           </form>
         </div>
       </div>
@@ -64,13 +67,13 @@ export default {
     return {
       message: "Welcome to Shop.Dream!",
       styles: [],
-      newStyle: {},
+      currentStyle: {},
       newStyleImage: "",
       itemTags: [],
       newItemTag: [],
       image: "",
-      user_id: 0,
-      style_id: 0
+      style_id: 0,
+      errors: []
     };
   },
   created: function() {
@@ -82,8 +85,8 @@ export default {
     );
   },
   methods: {
-    showStyle: function(style) {
-      this.newStyle = style;
+    setCurrentStyle: function(style) {
+      this.currentStyle = style;
     },
     setFile: function(event) {
       if (event.target.files.length > 0) {
@@ -101,9 +104,9 @@ export default {
     createItemTag: function() {
       let params = {
         name: this.newItemTag,
-        user_id: this.user_id,
-        style_id: this.style_id
+        style_id: this.currentStyle.id
       };
+      console.log("params", params);
       axios
         .post("http://localhost:3000/api/item_tags", params)
         .then(
@@ -111,6 +114,10 @@ export default {
             console.log(response);
             this.itemTags.push(response.data);
             this.newItemTag = "";
+            console.log("GONNA CHANGE PAGE", this.currentStyle.id);
+            // window.location.href = "/#/styles/" + this.currentStyle.id;
+            $(".bd-example-modal-lg").modal("hide");
+            this.$router.push("/styles/" + this.currentStyle.id);
           }.bind(this)
         )
         .catch(
@@ -119,7 +126,6 @@ export default {
             this.errors = error.response.data.errors;
           }.bind(this)
         );
-      window.location.href = `"/#/styles/" + style_id`;
     },
     createStyle: function() {
       let params = {

@@ -183,7 +183,7 @@ export default {
     });
 
     this.places.forEach(function(place) {
-      var popup = new mapboxgl.Popup({ offset: 80 }).setText(place.description);
+      var popup = new mapboxgl.Popup({ offset: 25 }).setText(place.store);
       var marker = new mapboxgl.Marker()
         .setLngLat([place.lng, place.lat])
         .setPopup(popup)
