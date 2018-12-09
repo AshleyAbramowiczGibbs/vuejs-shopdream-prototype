@@ -2,11 +2,17 @@
   <div class="home">
     <h1>{{ message }}</h1>
 
-    <button v-on:click="createStyle();" class="btn btn-primary">Upload a new style</button> Image:
+    <button v-on:click="createStyle();" class="btn btn-primary">Copy an image link to add a new style</button> Image:
     <input v-model="newStyleImage" type="text" />
 
+    <form v-on:submit.prevent="submit();">
+      <h2>Upload a style</h2>
+      <div>Image: <input type="file" v-on:change="setFile($event);" ref="fileInput" /></div>
+      <input type="submit" value="Submit" />
+    </form>
+
     <div v-for="style in styles">
-      <img v-bind:src="style.image_url" />
+      <img v-bind:src="style.image_url" /> <span v-on:click="style_id = style.id;"></span>
       <p>url: {{ style.image_url }}</p>
       <button
         v-on:click="showStyle(style);"
@@ -42,7 +48,6 @@
               <input v-model="newItemTag" type="text" /> Item Tag<br />
             -->
             <button v-on:click="createItemTag();" class="btn btn-primary">Search for your Items</button>
-            <a href="'/#/styles/' + style.id" class="btn btn-primary">Go somewhere</a>
           </form>
         </div>
       </div>
@@ -62,6 +67,8 @@ export default {
       newStyle: {},
       newStyleImage: "",
       itemTags: [],
+      newItemTag: [],
+      image: "",
       user_id: 0,
       style_id: 0
     };
@@ -77,6 +84,19 @@ export default {
   methods: {
     showStyle: function(style) {
       this.newStyle = style;
+    },
+    setFile: function(event) {
+      if (event.target.files.length > 0) {
+        this.image = event.target.files[0];
+      }
+    },
+    submit: function() {
+      var formData = new FormData();
+      formData.append("image", this.image);
+
+      axios.post("http://localhost:3000/api/styles", formData).then(response => {
+        this.$refs.fileInput.value = "";
+      });
     },
     createItemTag: function() {
       let params = {
@@ -99,6 +119,7 @@ export default {
             this.errors = error.response.data.errors;
           }.bind(this)
         );
+      window.location.href = `"/#/styles/" + style_id`;
     },
     createStyle: function() {
       let params = {
@@ -122,7 +143,6 @@ export default {
         );
     }
   },
-
   computed: {}
 };
 </script>

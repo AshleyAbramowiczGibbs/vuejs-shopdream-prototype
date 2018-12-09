@@ -76,6 +76,7 @@
                 <div class="card-body">
                   <p class="card-title">{{ asos_product.name }}</p>
                   <p>${{ asos_product.price.current.value }}</p>
+                  <a v-bind:href="'https://us.asos.com/{{ asos_product.url }}'" class="btn btn-primary"> Buy This!</a>
                 </div>
               </div>
             </div>
@@ -104,7 +105,9 @@
             </button>
           </div>
           <div class="modal-body">
+            <div id="map"></div>
             <div>I want to show all the items from the nearby API here</div>
+
             <div class="modal-body">
               <div v-for="store in stores" v-bind:key="store.id">
                 <div class="card">
@@ -127,7 +130,12 @@
   </div>
 </template>
 
-<style></style>
+<style>
+#map {
+  height: 400px;
+  width: 100%;
+}
+</style>
 
 <script>
 var axios = require("axios");
@@ -141,7 +149,8 @@ export default {
       asos_products: [],
       item_tag: "",
       current_item_tag: {},
-      currentSearch: {}
+      currentSearch: {},
+      places: [{ lat: 0, lng: 0, store: "" }]
     };
   },
   created: function() {
@@ -162,6 +171,24 @@ export default {
     //   console.log(response.data);
     //   this.products = response.data;
     // });
+  },
+  mounted: function() {
+    mapboxgl.accessToken =
+      "pk.eyJ1IjoiYXNobGV5YWJyYW1vMiIsImEiOiJjam96MWthbG8ycDk5M2ttbzlxeGF2bjRpIn0.sWcXeBu7CQ3vipEFwj8wcA";
+    var map = new mapboxgl.Map({
+      container: "map", // container id
+      style: "mapbox://styles/mapbox/streets-v9", // stylesheet location
+      center: [-87.62, 41.87], // starting position [lng, lat]
+      zoom: 10 // starting zoom
+    });
+
+    this.places.forEach(function(place) {
+      var popup = new mapboxgl.Popup({ offset: 80 }).setText(place.description);
+      var marker = new mapboxgl.Marker()
+        .setLngLat([place.lng, place.lat])
+        .setPopup(popup)
+        .addTo(map);
+    });
   },
   methods: {
     searchOnlineAPI: function(item_tag) {
