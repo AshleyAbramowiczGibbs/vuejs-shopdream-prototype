@@ -132,8 +132,9 @@
 
 <style>
 #map {
-  height: 800px;
+  height: 500px;
   width: 100%;
+  text-align: left;
 }
 
 img.resize {
@@ -187,7 +188,7 @@ export default {
     // process.env.VUE_APP_MAPBOX_KEY;
     var map = new mapboxgl.Map({
       container: "map", // container id
-      style: "mapbox://styles/mapbox/streets-v9", // stylesheet location
+      style: "mapbox://styles/mapbox/streets-v10", // stylesheet location
       center: [-87.62, 41.87], // starting position [lng, lat]
       zoom: 10 // starting zoom
     });

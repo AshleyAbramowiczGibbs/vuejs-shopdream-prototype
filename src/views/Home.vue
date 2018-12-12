@@ -7,22 +7,29 @@
 
     <form v-on:submit.prevent="submit();">
       <h2>Upload a style</h2>
-      <div>Image: <input type="file" v-on:change="setFile($event);" ref="fileInput" /></div>
+      <div>(broken) Image: <input type="file" v-on:change="setFile($event);" ref="fileInput" /></div>
       <input type="submit" value="Submit" />
     </form>
 
     <div v-for="style in styles">
-      <img class="medium" v-bind:src="style.image_url" />
-      <p>url: {{ style.image_url }}</p>
-      <button
-        v-on:click="setCurrentStyle(style);"
-        type="button"
-        class="btn btn-primary"
-        data-toggle="modal"
-        data-target=".bd-example-modal-lg"
-      >
-        Tag Your Style
-      </button>
+      <div class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+          <img class="activator" v-bind:src="style.image ? style.image : style.image_url" />
+        </div>
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4"
+            >Card Title<i class="material-icons right">more_vert</i></span
+          >
+          <p>url: {{ style.image_url }}</p>
+          <p>url2: {{ style.image }}</p>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+          <p>Here is some more information about this product that is only revealed once clicked on.</p>
+
+          <a v-bind:href="`/#/styles/${currentStyle.id}`" class="btn btn-primary"> (Broken) Style Show </a>
+        </div>
+      </div>
     </div>
     <div
       class="modal fade bd-example-modal-lg"
@@ -99,11 +106,13 @@ export default {
       }
     },
     submit: function() {
-      let params = {
-        image_url: this.image
-      };
+      // let params = {
+      //   image_url: this.image
+      // };
+      var formData = new FormData();
+      formData.append("image", this.image);
 
-      axios.post("http://localhost:3000/api/styles", params).then(
+      axios.post("http://localhost:3000/api/styles", formData).then(
         function(response) {
           console.log(response);
           this.styles.push(response.data);
