@@ -1,14 +1,24 @@
 <template>
   <div class="home">
-    <h1>{{ message }}</h1>
+    <div class="row">
+      <form class="col s12">
+        <div class="row">
+          <div class="input-field col s6">
+            <i class="material-icons prefix">linked_camera</i>
+            <input id="icon_prefix" v-model="newStyleImage" type="text" class="validate" />
+            <label for="icon_prefix">Paste an image link of a style you need!</label>
 
-    <button v-on:click="createStyle();" class="btn btn-primary">Copy an image link to add a new style</button> Image:
-    <input v-model="newStyleImage" type="text" />
+            <button v-on:click="createStyle();" class="btn btn-primary">Add Image</button>
+          </div>
+        </div>
+      </form>
+    </div>
 
     <form v-on:submit.prevent="submit();">
-      <h2>Upload a style</h2>
-      <div>(broken) Image: <input type="file" v-on:change="setFile($event);" ref="fileInput" /></div>
-      <input type="submit" value="Submit" />
+      <div>
+        Upload a Style <input class="btn btn-primary" type="file" v-on:change="setFile($event);" ref="fileInput" />
+      </div>
+      <input class="btn btn-primary" type="submit" value="ADD IMAGE" />
     </form>
 
     <div v-for="style in styles">
@@ -41,7 +51,6 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <h1>Add Your Tags to Find Your Items</h1>
-
           <ul>
             <li class="text-danger" v-for="error in errors">{{ error }}</li>
           </ul>
@@ -69,6 +78,12 @@
 img.medium {
   width: 380px;
   height: 530px;
+}
+
+.card {
+  max-width: 600px;
+  flex-grow: 1;
+  vertical-align: middle;
 }
 </style>
 

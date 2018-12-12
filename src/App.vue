@@ -5,7 +5,7 @@
       <div>
         <nav>
           <div class="nav-wrapper">
-            <a href="#!" class="brand-logo"><i class="material-icons">linked_camera | </i> shop.Dream</a>
+            <a href="#!" class="brand-logo"> shop.Dream </a>
             <ul class="right hide-on-med-and-down">
               <li>
                 <a href="sass.html"><i class="material-icons">favorite_border</i></a>
@@ -36,6 +36,15 @@ body {
 }
 
 nav {
-  background-color: ##ffffff;
+  background-color: #ffff;
+}
+
+a.brand-logo {
+  color: #212121;
+  font-family: Pacifico;
+}
+
+i.material-icons {
+  color: #212121;
 }
 </style>

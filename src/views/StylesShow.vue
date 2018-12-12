@@ -3,7 +3,21 @@
     <div class="container">
       <a href="/#/">Back to Your Styles</a>
       <h1>Style info</h1>
+
       <img class="resize" v-bind:src="style.image_url" />
+
+      <ul class="collection">
+        <li class="collection-item avatar">
+          <i class="material-icons circle">loyalty</i> <span class="title"> Item Tag Name </span>
+          <p>
+            <a href="#!" class="secondary-content"> Find Nearby <i class="material-icons">location_on</i></a>
+          </p>
+          <p>
+            Find Online
+            <a href="#!" <i class="material-icons">redeem</i></a>
+          </p>
+        </li>
+      </ul>
 
       <div v-for="item_tag in style.item_tags">
         <!-- Button trigger modal -->
@@ -144,6 +158,10 @@ img.resize {
 img.small {
   width: 50%;
   height: 300px;
+}
+
+#collection {
+  max-width: 100px;
 }
 </style>
 
