@@ -5,22 +5,39 @@
       <h1>Style info</h1>
 
       <img class="resize" v-bind:src="style.image_url" />
-
-      <ul class="collection">
-        <li class="collection-item avatar">
-          <i class="material-icons circle">loyalty</i> <span class="title"> Item Tag Name </span>
-          <p>
-            <a href="#!" class="secondary-content"> Find Nearby <i class="material-icons">location_on</i></a>
-          </p>
-          <p>
-            Find Online
-            <a href="#!" <i class="material-icons">redeem</i></a>
-          </p>
-        </li>
-      </ul>
-
       <div v-for="item_tag in style.item_tags">
-        <!-- Button trigger modal -->
+        <ul class="collection">
+          <li class="collection-item avatar">
+            <i class="material-icons circle">loyalty</i> <span class="title"> {{ item_tag.name }} </span>
+
+            <div>
+              <p>
+                <a
+                  href="#!"
+                  class="secondary-content"
+                  v-on:click="searchNearbyAPI(item_tag), setMapMarkers(stores);"
+                  data-toggle="modal"
+                  data-target="#nearbyModal"
+                >
+                  Find Nearby <i class="material-icons">location_on</i></a
+                >
+                <a
+                  href="#!"
+                  class="content"
+                  v-on:click="searchOnlineAPI(item_tag);"
+                  data-toggle="modal"
+                  data-target="#onlineModal"
+                >
+                  Find Online <i class="material-icons">redeem</i></a
+                >
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <!-- <div v-for="item_tag in style.item_tags"> -->
+      <!-- Button trigger modal -->
+      <!--
         <div>
           <button
             v-on:click="searchOnlineAPI(item_tag);"
@@ -46,23 +63,23 @@
           <br />
           <br />
         </div>
+      -->
+      <!--
+        {{ item_tags }}
 
-        <!--
-          {{ item_tags }}
+        <div v-for="item_tag in item_tags">
+          <p>{{ item_tag.name }}</p>
+          <p>{{ item_tag.potential_purchases }}</p>
 
-          <div v-for="item_tag in item_tags">
-            <p>{{ item_tag.name }}</p>
-            <p>{{ item_tag.potential_purchases }}</p>
+          <a v-bind:href="'/#/Nearby' + item_tag" class="btn btn-primary">Find Nearby</a>
+          <a v-bind:href="`/#/Nearby`" class="btn btn-primary">Find Online</a>
 
-            <a v-bind:href="'/#/Nearby' + item_tag" class="btn btn-primary">Find Nearby</a>
-            <a v-bind:href="`/#/Nearby`" class="btn btn-primary">Find Online</a>
-
-            click on the item and tag and you get a pop up (find nearby or find)
+          click on the item and tag and you get a pop up (find nearby or find)
 
 
-          </div>
-        -->
-      </div>
+        </div>
+      -->
+      <!-- </div> -->
     </div>
 
     <!-- Modal -->

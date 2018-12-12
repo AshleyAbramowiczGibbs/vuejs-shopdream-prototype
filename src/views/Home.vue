@@ -30,44 +30,64 @@
           <span class="card-title activator grey-text text-darken-4"
             >Card Title<i class="material-icons right">more_vert</i></span
           >
+          <button
+            v-on:click="showStyle(style);"
+            type="button"
+            class="btn btn-primary"
+            data-toggle="modal"
+            data-target=".bd-example-modal-lg"
+          >
+            Tag Your Style
+          </button>
+
+          <!-- Customizable input -->
+          <div class="chips"><input class="custom-class" v-model="newItemTag" /></div>
+          <div class="chips chips-initial"></div>
+          <div class="chips chips-placeholder"></div>
+          <div class="chips chips-autocomplete"></div>
+
           <p>url: {{ style.image_url }}</p>
-          <p>url2: {{ style.image }}</p>
+
+          <div v-for="item_tag in style.item_tags">
+            <p>{{ item_tag.name }}</p>
+          </div>
         </div>
         <div class="card-reveal">
           <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
           <p>Here is some more information about this product that is only revealed once clicked on.</p>
 
           <a v-bind:href="`/#/styles/${currentStyle.id}`" class="btn btn-primary"> (Broken) Style Show </a>
-        </div>
-      </div>
-    </div>
-    <div
-      class="modal fade bd-example-modal-lg"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="myLargeModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <h1>Add Your Tags to Find Your Items</h1>
-          <ul>
-            <li class="text-danger" v-for="error in errors">{{ error }}</li>
-          </ul>
-          <!--
-            <div><img src="style.image_url" /></div>
-            <p>{{ style.item_tags }}</p>
-          -->
-          <form v-on:submit.prevent="createItemTag();">
-            <input v-model="newItemTag" type="text" /> Item Tag<br />
-            <!--
-              <input v-model="newItemTag" type="text" /> Item Tag<br />
-              <input v-model="newItemTag" type="text" /> Item Tag<br />
-              <input v-model="newItemTag" type="text" /> Item Tag<br />
-              <input v-model="newItemTag" type="text" /> Item Tag<br />
-            -->
-            <button type="submit" class="btn btn-primary">Search for your Items</button>
-          </form>
+
+          <div
+            class="modal fade bd-example-modal-lg"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="myLargeModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <h1>Add Your Tags to Find Your Items</h1>
+                <ul>
+                  <li class="text-danger" v-for="error in errors">{{ error }}</li>
+                </ul>
+                <!--
+                  <div><img src="style.image_url" /></div>
+                  <p>{{ style.item_tags }}</p>
+                -->
+                <form v-on:submit.prevent="createItemTag();">
+                  <input v-model="newItemTag" type="text" /> Item Tag<br />
+                  <!--
+                    <input v-model="newItemTag" type="text" /> Item Tag<br />
+                    <input v-model="newItemTag" type="text" /> Item Tag<br />
+                    <input v-model="newItemTag" type="text" /> Item Tag<br />
+                    <input v-model="newItemTag" type="text" /> Item Tag<br />
+                  -->
+                  <button type="submit" class="btn btn-primary">Search for your Items</button>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -100,7 +120,10 @@ export default {
       newItemTag: [],
       image: "",
       style_id: 0,
-      errors: []
+      errors: [],
+      chip: {
+        tag: "chip content"
+      }
     };
   },
   created: function() {
