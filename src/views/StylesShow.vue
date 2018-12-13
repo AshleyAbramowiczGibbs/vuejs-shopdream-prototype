@@ -1,40 +1,81 @@
 <template>
   <div class="home">
     <div class="container">
-      <a href="/#/">Back to Your Styles</a>
-      <h1>Style info</h1>
-
-      <img class="resize" v-bind:src="style.image_url" />
-      <div v-for="item_tag in style.item_tags">
-        <ul class="collection">
-          <li class="collection-item avatar">
-            <i class="material-icons circle">loyalty</i> <span class="title"> {{ item_tag.name }} </span>
-
-            <div>
-              <p>
-                <a
-                  href="#!"
-                  class="secondary-content"
-                  v-on:click="searchNearbyAPI(item_tag), setMapMarkers(stores);"
-                  data-toggle="modal"
-                  data-target="#nearbyModal"
-                >
-                  Find Nearby <i class="material-icons">location_on</i></a
-                >
-                <a
-                  href="#!"
-                  class="content"
-                  v-on:click="searchOnlineAPI(item_tag);"
-                  data-toggle="modal"
-                  data-target="#onlineModal"
-                >
-                  Find Online <i class="material-icons">redeem</i></a
-                >
-              </p>
+      <div class="row">
+        <div class="col s12 m6">
+          <div class="card">
+            <div class="card-image">
+              <img v-bind:src="style.image_url" /> <span class="card-title"></span>
+              <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
             </div>
-          </li>
-        </ul>
+            <div class="card-content">
+              <div v-for="item_tag in style.item_tags">
+                <ul class="collection">
+                  <li class="collection-item avatar">
+                    <i class="material-icons circle">loyalty</i> <span class="title"> {{ item_tag.name }} </span>
+
+                    <div>
+                      <p>
+                        <a
+                          href="#!"
+                          class="secondary-content"
+                          v-on:click="searchNearbyAPI(item_tag), setMapMarkers(stores);"
+                          data-toggle="modal"
+                          data-target="#nearbyModal"
+                        >
+                          Find Nearby <i class="material-icons">location_on</i></a
+                        >
+                        <a
+                          href="#!"
+                          class="content"
+                          v-on:click="searchOnlineAPI(item_tag);"
+                          data-toggle="modal"
+                          data-target="#onlineModal"
+                        >
+                          Find Online <i class="material-icons">redeem</i></a
+                        >
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <p></p>
+            </div>
+          </div>
+        </div>
       </div>
+      <!--
+        <div v-for="item_tag in style.item_tags">
+          <ul class="collection">
+            <li class="collection-item avatar">
+              <i class="material-icons circle">loyalty</i> <span class="title"> {{ item_tag.name }} </span>
+
+              <div>
+                <p>
+                  <a
+                    href="#!"
+                    class="secondary-content"
+                    v-on:click="searchNearbyAPI(item_tag), setMapMarkers(stores);"
+                    data-toggle="modal"
+                    data-target="#nearbyModal"
+                  >
+                    Find Nearby <i class="material-icons">location_on</i></a
+                  >
+                  <a
+                    href="#!"
+                    class="content"
+                    v-on:click="searchOnlineAPI(item_tag);"
+                    data-toggle="modal"
+                    data-target="#onlineModal"
+                  >
+                    Find Online <i class="material-icons">redeem</i></a
+                  >
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      -->
       <!-- <div v-for="item_tag in style.item_tags"> -->
       <!-- Button trigger modal -->
       <!--

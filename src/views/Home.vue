@@ -1,5 +1,18 @@
 <template>
   <div class="home">
+    <div>
+      <ul class="collapsible">
+        <li>
+          <div class="collapsible-header"><i class="material-icons">add_a_photo</i> Add a Style</div>
+          <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+        </li>
+        <li>
+          <div class="collapsible-header"><i class="material-icons">cloud_upload</i> Upload a Style</div>
+          <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+        </li>
+      </ul>
+    </div>
+
     <div class="row">
       <form class="col s12">
         <div class="row">
@@ -98,12 +111,6 @@
 img.medium {
   width: 380px;
   height: 530px;
-}
-
-.card {
-  max-width: 600px;
-  flex-grow: 1;
-  vertical-align: middle;
 }
 </style>
 
