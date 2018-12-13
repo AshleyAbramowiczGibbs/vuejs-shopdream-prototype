@@ -221,6 +221,19 @@ img.small {
 #collection {
   max-width: 100px;
 }
+
+#marker {
+  background-image: url("https://www.mapbox.com/mapbox-gl-js/assets/washington-monument.jpg");
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.mapboxgl-popup {
+  max-width: 200px;
+}
 </style>
 
 <script>
@@ -236,7 +249,10 @@ export default {
       item_tag: "",
       current_item_tag: {},
       currentSearch: {},
-      places: [{ lat: 0, lng: 0, store: "" }]
+      places: [
+        { lat: 41.87, lng: -87.62, description: "A place in Australia" },
+        { lat: 42, lng: 88, description: "The main city!" }
+      ]
     };
   },
   created: function() {
@@ -265,12 +281,12 @@ export default {
     var map = new mapboxgl.Map({
       container: "map", // container id
       style: "mapbox://styles/mapbox/streets-v10", // stylesheet location
-      center: [-87.62, 41.87], // starting position [lng, lat]
+      center: [this.places[0].lng, this.places[0].lat], // starting position [lng, lat]
       zoom: 10 // starting zoom
     });
 
     this.places.forEach(function(place) {
-      var popup = new mapboxgl.Popup({ offset: 25 }).setText(place.store);
+      var popup = new mapboxgl.Popup({ offset: 25 }).setText("go to this store");
       var marker = new mapboxgl.Marker()
         .setLngLat([place.lng, place.lat])
         .setPopup(popup)

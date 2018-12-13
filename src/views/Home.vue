@@ -4,35 +4,33 @@
       <ul class="collapsible">
         <li>
           <div class="collapsible-header"><i class="material-icons">add_a_photo</i> Add a Style</div>
-          <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+          <div class="collapsible-body">
+            <div class="row">
+              <form class="col s12">
+                <div class="row">
+                  <div class="input-field col s6">
+                    <i class="material-icons prefix">linked_camera</i>
+                    <input id="icon_prefix" v-model="newStyleImage" type="text" class="validate" />
+                    <label for="icon_prefix">Paste an image link of a style you need!</label>
+
+                    <button v-on:click="createStyle();" class="btn btn-primary">Add Image</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
         </li>
         <li>
           <div class="collapsible-header"><i class="material-icons">cloud_upload</i> Upload a Style</div>
-          <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+          <div class="collapsible-body">
+            <form v-on:submit.prevent="submit();">
+              <div><input class="btn btn-primary" type="file" v-on:change="setFile($event);" ref="fileInput" /></div>
+              <input class="btn btn-primary" type="submit" value="ADD IMAGE" />
+            </form>
+          </div>
         </li>
       </ul>
     </div>
-
-    <div class="row">
-      <form class="col s12">
-        <div class="row">
-          <div class="input-field col s6">
-            <i class="material-icons prefix">linked_camera</i>
-            <input id="icon_prefix" v-model="newStyleImage" type="text" class="validate" />
-            <label for="icon_prefix">Paste an image link of a style you need!</label>
-
-            <button v-on:click="createStyle();" class="btn btn-primary">Add Image</button>
-          </div>
-        </div>
-      </form>
-    </div>
-
-    <form v-on:submit.prevent="submit();">
-      <div>
-        Upload a Style <input class="btn btn-primary" type="file" v-on:change="setFile($event);" ref="fileInput" />
-      </div>
-      <input class="btn btn-primary" type="submit" value="ADD IMAGE" />
-    </form>
 
     <div v-for="style in styles">
       <div class="card">
@@ -115,6 +113,7 @@ img.medium {
 </style>
 
 <script>
+/* global M */
 let axios = require("axios");
 export default {
   data: function() {
@@ -140,6 +139,10 @@ export default {
         this.styles = response.data;
       }.bind(this)
     );
+  },
+  mounted: function() {
+    var elems = document.querySelectorAll(".collapsible");
+    var instances = M.Collapsible.init(elems);
   },
   methods: {
     setCurrentStyle: function(style) {
