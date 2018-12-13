@@ -11,32 +11,23 @@
                 <a href="/#/"><i class="material-icons">favorite_border</i></a>
               </li>
               <li>
-                <a href="/#/login"><i data-target="dropdown1" class="material-icons">person_outline</i></a>
-
-                <ul id="dropdown1" class="dropdown-content">
-                  <li><a href="#!">one</a></li>
-                  <li><a href="#!">two</a></li>
-                  <li class="divider" tabindex="-1"></li>
-                  <li><a href="#!">three</a></li>
-                  <li>
-                    <a href="#!"><i class="material-icons">view_module</i>four</a>
-                  </li>
-                  <li>
-                    <a href="#!"><i class="material-icons">cloud</i>five</a>
-                  </li>
-                </ul>
+                <a href="/#/"><i class="material-icons">person_outline</i> </a>
               </li>
+
+              <a class="dropdown-trigger btn" href="#" data-target="dropdown1">Login</a>
+
+              <ul id="dropdown1" class="dropdown-content">
+                <li><a href="/#/login">Login</a></li>
+                <li><a href="/#/signup">Signup</a></li>
+                <li><a href="/#/logout">Logout</a></li>
+              </ul>
               <li>
                 <a href="/#/"><i class="material-icons">style</i></a>
-              </li>
-              <li>
-                <a href="mobile.html"><i class="material-icons">more_vert</i></a>
               </li>
             </ul>
           </div>
         </nav>
       </div>
-      <a href="/#/signup"> | Signup</a> <a href="/#/login"> | Login</a> <a href="/#/logout"> | Logout</a>
     </div>
     <router-view />
   </div>
@@ -79,5 +70,18 @@ label {
 </style>
 
 <script>
-// method: var instance = M.Dropdown.getInstance(elem);
+export default {
+  data: function() {
+    return {
+      message: "Welcome to Vue.js!"
+    };
+  },
+  mounted: function() {
+    var elems = document.querySelectorAll(".dropdown-trigger");
+    var instances = M.Dropdown.init(elems);
+  },
+  created: function() {},
+  methods: {},
+  computed: {}
+};
 </script>

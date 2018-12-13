@@ -51,11 +51,15 @@
             Tag Your Style
           </button>
 
-          <!-- Customizable input -->
-          <div class="chips"><input class="custom-class" v-model="newItemTag" /></div>
+          <div class="chip">Tag <i class="close material-icons">close</i></div>
+          <!-- Default with no input (automatically generated) -->
+          <div class="chips"></div>
           <div class="chips chips-initial"></div>
           <div class="chips chips-placeholder"></div>
           <div class="chips chips-autocomplete"></div>
+
+          <!-- Customizable input -->
+          <div class="chips"><input class="custom-class" /></div>
 
           <p>url: {{ style.image_url }}</p>
 
@@ -110,6 +114,10 @@ img.medium {
   width: 380px;
   height: 530px;
 }
+
+ul.collapsible {
+  margin: 40px 0px 20px 0px;
+}
 </style>
 
 <script>
@@ -127,7 +135,7 @@ export default {
       image: "",
       style_id: 0,
       errors: [],
-      chip: {
+      chips: {
         tag: "chip content"
       }
     };
@@ -143,8 +151,14 @@ export default {
   mounted: function() {
     var elems = document.querySelectorAll(".collapsible");
     var instances = M.Collapsible.init(elems);
+    var elemsChips = document.querySelectorAll(".chips");
+    var instancesChips = M.Chips.init(elemsChips);
   },
   methods: {
+    showStyle: function(style) {
+      this.newStyle = style;
+    },
+
     setCurrentStyle: function(style) {
       this.currentStyle = style;
     },
