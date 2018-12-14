@@ -1,5 +1,12 @@
 <template>
   <div class="home">
+    <div class="instagram">
+      <a
+        href="https://instawidget.net/v/tag/LTKstyletip"
+        id="link-6f97385d017359bb37fb45dd36c7f7f326782ee84e60fb73593cb8ed3d3fcbc8"
+        >#LTKstyletip</a
+      >
+    </div>
     <div>
       <ul class="collapsible">
         <li>
@@ -31,6 +38,8 @@
         </li>
       </ul>
     </div>
+
+    <!-- InstaWidget -->
 
     <div v-for="style in styles">
       <div class="card">
@@ -117,6 +126,10 @@ img.medium {
 
 ul.collapsible {
   margin: 40px 0px 20px 0px;
+}
+
+div.instragram {
+  width: 100px;
 }
 </style>
 

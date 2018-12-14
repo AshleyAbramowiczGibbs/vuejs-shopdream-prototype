@@ -25,6 +25,15 @@
                         >
                           Find Nearby <i class="material-icons">location_on</i></a
                         >
+
+                        <button
+                          data-target="nearby-modal"
+                          class="btn modal-trigger"
+                          v-on:click="searchNearbyAPI(item_tag), setMapMarkers(stores);"
+                        >
+                          Find Nearby
+                        </button>
+
                         <a
                           href="#!"
                           class="content"
@@ -34,6 +43,15 @@
                         >
                           Find Online <i class="material-icons">redeem</i></a
                         >
+
+                        <!-- Modal Trigger -->
+                        <button
+                          class="btn modal-trigger"
+                          v-on:click="searchOnlineAPI(item_tag);"
+                          data-target="asos-modal"
+                        >
+                          Find Online
+                        </button>
                       </p>
                     </div>
                   </li>
@@ -123,6 +141,18 @@
       <!-- </div> -->
     </div>
 
+    <!-- Asos Model -->
+    <!-- Modal Trigger -->
+
+    <!-- Modal Structure -->
+    <div id="asos-modal" class="modal">
+      <div class="modal-content">
+        <h4>Modal lkdjsljflskdfHeader</h4>
+        <p>A bunch of text</p>
+      </div>
+      <div class="modal-footer"><a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a></div>
+    </div>
+
     <!-- Modal -->
     <div
       class="modal fade"
@@ -159,44 +189,27 @@
         </div>
       </div>
     </div>
-    <!-- Modal -->
-    <div
-      class="modal fade"
-      id="nearbyModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="nearbyModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="nearbyModalLabel">{{ current_item_tag.name }}</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div>I want to show all the items from the nearby API here</div>
 
-            <div class="modal-body">
-              <span><div id="map"></div></span>
-              <div v-for="store in stores" v-bind:key="store.id">
-                <div class="card">
-                  <img class="small" v-bind:src="store.products[0].image" alt="Card image cap" />
-                  <div class="card-body">
-                    <p class="card-title">{{ store.name }}</p>
-                    <p>{{ store.products[0].title }}</p>
-                    <p>{{ store.locations[0].phone }}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <!-- nearby modal -->
+    <!-- Modal Trigger -->
+
+    <!-- Modal Structure -->
+    <div id="nearby-modal" class="modal">
+      <div class="modal-content">
+        <h4>{{ current_item_tag.name }}</h4>
+        <p>A bunch of text</p>
+        <span><div id="map"></div></span>
+        <div v-for="store in stores" v-bind:key="store.id">
+          <div class="card">
+            <img class="small" v-bind:src="store.products[0].image" alt="Card image cap" />
+            <div class="card-body">
+              <p class="card-title">{{ store.name }}</p>
+              <p>{{ store.products[0].title }}</p>
+              <p>{{ store.locations[0].phone }}</p>
             </div>
           </div>
         </div>
+        <div class="modal-footer"><a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a></div>
       </div>
     </div>
   </div>
@@ -213,6 +226,10 @@ img.resize {
   max-width: 300px;
 }
 
+canvas.mapboxgl-canvas {
+  width: 100%;
+}
+
 img.small {
   width: 50%;
   height: 300px;
@@ -220,6 +237,10 @@ img.small {
 
 #collection {
   max-width: 100px;
+}
+
+div.col.s12.m6 {
+  width: 100%;
 }
 
 #marker {
@@ -275,6 +296,8 @@ export default {
     // });
   },
   mounted: function() {
+    var elems = document.querySelectorAll(".modal");
+    var instances = M.Modal.init(elems);
     mapboxgl.accessToken =
       "pk.eyJ1IjoiYXNobGV5YWJyYW1vMiIsImEiOiJjanBoYzhkZXkwYzhnM2tqc2I1aGtjMWdhIn0.Qxaxlrd5QPSxZ9wn_WhE_Q";
     // process.env.VUE_APP_MAPBOX_KEY;
@@ -293,6 +316,7 @@ export default {
         .addTo(map);
     });
   },
+
   methods: {
     searchOnlineAPI: function(item_tag) {
       console.log("searchOnlineAPI", item_tag);

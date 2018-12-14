@@ -29,6 +29,9 @@
         </nav>
       </div>
     </div>
+
+    <!-- InstaWidget -->
+
     <router-view />
   </div>
 </template>
