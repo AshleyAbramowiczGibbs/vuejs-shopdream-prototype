@@ -47,10 +47,8 @@
           <img class="activator" v-bind:src="style.image ? style.image : style.image_url" />
         </div>
         <div class="card-content">
-          <span class="card-title activator grey-text text-darken-4"
-            >Card Title<i class="material-icons right">more_vert</i></span
-          >
-          <button
+          <span class="card-title activator grey-text text-darken-4"> </span>
+         <!--  <button
             v-on:click="showStyle(style);"
             type="button"
             class="btn btn-primary"
@@ -58,31 +56,26 @@
             data-target=".bd-example-modal-lg"
           >
             Tag Your Style
-          </button>
+          </button> -->
 
-          <div class="chip">Tag <i class="close material-icons">close</i></div>
-          <!-- Default with no input (automatically generated) -->
-          <div class="chips"></div>
-          <div class="chips chips-initial"></div>
-          <div class="chips chips-placeholder"></div>
-          <div class="chips chips-autocomplete"></div>
-
-          <!-- Customizable input -->
-          <div class="chips"><input class="custom-class" /></div>
-
-          <p>url: {{ style.image_url }}</p>
-
-          <div v-for="item_tag in style.item_tags">
-            <p>{{ item_tag.name }}</p>
-          </div>
-        </div>
-        <div class="card-reveal">
-          <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-          <p>Here is some more information about this product that is only revealed once clicked on.</p>
+            <!-- Item Tag Modal Trigger -->
+          <a v-on:click="setCurrentStyle(style);" class="waves-effect waves-light btn modal-trigger" href="#modal-new-tag">
+            Tag your style
+          </a>
 
           <a v-bind:href="`/#/styles/${currentStyle.id}`" class="btn btn-primary"> (Broken) Style Show </a>
 
-          <div
+          <div>
+            <div v-for="item_tag in style.item_tags "class="chip">
+              {{ item_tag.name }} <i class="close material-icons">close</i>
+            </div>
+          </div>
+
+          <p>url: {{ style.image_url }}</p>
+                      <p>Here is some more information about this product that is only revealed once clicked on.</p>
+
+        </div>
+          <!-- <div
             class="modal fade bd-example-modal-lg"
             tabindex="-1"
             role="dialog"
@@ -95,27 +88,34 @@
                 <ul>
                   <li class="text-danger" v-for="error in errors">{{ error }}</li>
                 </ul>
-                <!--
-                  <div><img src="style.image_url" /></div>
-                  <p>{{ style.item_tags }}</p>
-                -->
                 <form v-on:submit.prevent="createItemTag();">
                   <input v-model="newItemTag" type="text" /> Item Tag<br />
-                  <!--
-                    <input v-model="newItemTag" type="text" /> Item Tag<br />
-                    <input v-model="newItemTag" type="text" /> Item Tag<br />
-                    <input v-model="newItemTag" type="text" /> Item Tag<br />
-                    <input v-model="newItemTag" type="text" /> Item Tag<br />
-                  -->
                   <button type="submit" class="btn btn-primary">Search for your Items</button>
                 </form>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
+
+      <!-- Item Tag Modal Structure -->
+      <div id="modal-new-tag" class="modal">
+        <div class="modal-content">
+          <h4>Add Your Tags to Find Your Items</h4>
+            <ul>
+              <li class="text-danger" v-for="error in errors">{{ error}}</li>
+            </ul>
+            <form v-on:submit.prevent="createItemTag();">
+              <input v-model="newItemTag" type="text" />
+              <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <a class="modal-close waves-effect waves-green btn-flat">Close</a>
+        </div>
+      </div>
+
     </div>
-  </div>
 </template>
 
 <style>
@@ -130,6 +130,10 @@ ul.collapsible {
 
 div.instragram {
   width: 100px;
+}
+
+button.btn-primary {
+  margin: 11px;
 }
 </style>
 
@@ -166,6 +170,8 @@ export default {
     var instances = M.Collapsible.init(elems);
     var elemsChips = document.querySelectorAll(".chips");
     var instancesChips = M.Chips.init(elemsChips);
+    var elemsModal = document.querySelectorAll(".modal");
+    var instancesModal = M.Modal.init(elemsModal);
   },
   methods: {
     showStyle: function(style) {
@@ -208,10 +214,17 @@ export default {
             console.log(response);
             this.itemTags.push(response.data);
             this.newItemTag = "";
-            console.log("GONNA CHANGE PAGE", this.currentStyle.id);
+            this.currentStyle.item_tags.push(response.data);
+            // CLOSE THE MODAL
+            // $(".bd-example-modal-lg").modal("hide");
+            // var instance = M.Modal.getInstance("#modal-new-tag");
+            // instance.close();
+            $(".modal").modal("close");
+
+            // REDIRECT?
+            // console.log("GONNA CHANGE PAGE", this.currentStyle.id);
             // window.location.href = "/#/styles/" + this.currentStyle.id;
-            $(".bd-example-modal-lg").modal("hide");
-            this.$router.push("/styles/" + this.currentStyle.id);
+            // this.$router.push("/styles/" + this.currentStyle.id);
           }.bind(this)
         )
         .catch(
