@@ -141,38 +141,13 @@
       <!-- </div> -->
     </div>
 
-    <!-- Asos Model -->
-    <!-- Modal Trigger -->
 
-    <!-- Modal Structure -->
+    <!-- Online Modal Structure -->
     <div id="asos-modal" class="modal">
       <div class="modal-content">
-        <h4>Modal lkdjsljflskdfHeader</h4>
-        <p>A bunch of text</p>
-      </div>
-      <div class="modal-footer"><a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a></div>
-    </div>
+        <h4>{{ current_item_tag.name }}</h4>
 
-    <!-- Modal -->
-    <div
-      class="modal fade"
-      id="onlineModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">{{ current_item_tag.name }}</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <div class="row" is="transition-group" name="slide-right"></div>
-          </div>
-          <div class="modal-body">
-            <div v-for="asos_product in asos_products" v-bind:key="asos_product.id">
+            <div class="row" v-for="asos_product in asos_products" v-bind:key="asos_product.id">
               <div class="card">
                 <img class="card-img-top" v-bind:src="asos_product.baseImageUrl" alt="Card image cap" />
                 <div class="card-body">
@@ -181,26 +156,21 @@
                   <a v-bind:href="'https://us.asos.com/{{ asos_product.url }}'" class="btn btn-primary"> Buy This!</a>
                 </div>
               </div>
-            </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
-        </div>
+
       </div>
+      <div class="modal-footer"><a class="modal-close waves-effect waves-green btn-flat">Close</a></div>
     </div>
 
-    <!-- nearby modal -->
-    <!-- Modal Trigger -->
 
-    <!-- Modal Structure -->
+    <!-- Nearby Modal Structure -->
     <div id="nearby-modal" class="modal">
       <div class="modal-content">
         <h4>{{ current_item_tag.name }}</h4>
         <p>A bunch of text</p>
         <span><div id="map"></div></span>
         <div v-for="store in stores" v-bind:key="store.id">
-          <div class="card">
+          <div class="product-card">
             <img class="small" v-bind:src="store.products[0].image" alt="Card image cap" />
             <div class="card-body">
               <p class="card-title">{{ store.name }}</p>
@@ -209,7 +179,7 @@
             </div>
           </div>
         </div>
-        <div class="modal-footer"><a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a></div>
+        <div class="modal-footer"><a class="modal-close waves-effect waves-green btn-flat">Close</a></div>
       </div>
     </div>
   </div>
@@ -254,6 +224,10 @@ div.col.s12.m6 {
 
 .mapboxgl-popup {
   max-width: 200px;
+}
+
+div.product-card {
+  max-width: 400px;
 }
 </style>
 

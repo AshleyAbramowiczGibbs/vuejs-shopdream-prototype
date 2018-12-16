@@ -63,16 +63,14 @@
             Tag your style
           </a>
 
-          <a v-bind:href="`/#/styles/${currentStyle.id}`" class="btn btn-primary"> (Broken) Style Show </a>
+          <a v-on:click="setCurrentStyle(style);" v-bind:href="`/#/styles/${currentStyle.id}`" class="btn btn-primary"> Buy this Look! </a>
+           <i class="material-icons right">favorite_border</i>
 
           <div>
             <div v-for="item_tag in style.item_tags "class="chip">
               {{ item_tag.name }} <i class="close material-icons">close</i>
             </div>
           </div>
-
-          <p>url: {{ style.image_url }}</p>
-                      <p>Here is some more information about this product that is only revealed once clicked on.</p>
 
         </div>
           <!-- <div
