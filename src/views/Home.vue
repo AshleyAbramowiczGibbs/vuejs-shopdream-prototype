@@ -1,12 +1,7 @@
 <template>
   <div class="home">
-    <div class="instagram">
-      <a
-        href="https://instawidget.net/v/tag/LTKstyletip"
-        id="link-6f97385d017359bb37fb45dd36c7f7f326782ee84e60fb73593cb8ed3d3fcbc8"
-        >#LTKstyletip</a
-      >
-    </div>
+
+    <div class="left">
     <div>
       <ul class="collapsible">
         <li>
@@ -15,7 +10,7 @@
             <div class="row">
               <form class="col s12">
                 <div class="row">
-                  <div class="input-field col s6">
+                  <div class="input-field col s12">
                     <i class="material-icons prefix">linked_camera</i>
                     <input id="icon_prefix" v-model="newStyleImage" type="text" class="validate" />
                     <label for="icon_prefix">Paste an image link of a style you need!</label>
@@ -95,6 +90,7 @@
           </div> -->
         </div>
       </div>
+      </div>
 
       <!-- Item Tag Modal Structure -->
       <div id="modal-new-tag" class="modal">
@@ -117,6 +113,17 @@
 </template>
 
 <style>
+i.material.icons.right {
+  vertical-align: right;
+}
+
+a.waves-effect {
+  margin: 10px 20px 20px 0px;
+}
+
+a.btn {
+  margin: 10px 20px 20px 0px;
+}
 img.medium {
   width: 380px;
   height: 530px;
@@ -127,7 +134,12 @@ ul.collapsible {
 }
 
 div.instragram {
-  width: 100px;
+  width: 400px;
+  vertical-align: middle;
+}
+
+iframe {
+  height: 9000px;
 }
 
 button.btn-primary {

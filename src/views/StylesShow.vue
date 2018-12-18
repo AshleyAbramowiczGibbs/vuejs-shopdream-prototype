@@ -1,5 +1,7 @@
 <template>
   <div class="home">
+
+    <div class="left">
     <div class="container">
       <div class="row">
         <div class="col s12 m6">
@@ -12,7 +14,7 @@
               <div v-for="item_tag in style.item_tags">
                 <ul class="collection">
                   <li class="collection-item avatar">
-                    <i class="material-icons circle">loyalty</i> <span class="title"> {{ item_tag.name }} </span>
+                    <i class="material-icons circle">loyalty</i> <span class="title"> {{ item_tag.name.toUpperCase() }} </span>
 
                     <div>
                       <p>
@@ -23,7 +25,7 @@
                           data-toggle="modal"
                           data-target="#nearbyModal"
                         >
-                          Find Nearby <i class="material-icons">location_on</i></a
+                          <!-- <i class="material-icons">location_on</i> --></a
                         >
 
                         <button
@@ -31,7 +33,8 @@
                           class="btn modal-trigger"
                           v-on:click="searchNearbyAPI(item_tag), setMapMarkers(stores);"
                         >
-                          Find Nearby
+                        Find Nearby 
+                          
                         </button>
 
                         <a
@@ -41,8 +44,7 @@
                           data-toggle="modal"
                           data-target="#onlineModal"
                         >
-                          Find Online <i class="material-icons">redeem</i></a
-                        >
+                          <!-- <i class="material-icons">redeem</i> --></a>
 
                         <!-- Modal Trigger -->
                         <button
@@ -57,106 +59,41 @@
                   </li>
                 </ul>
               </div>
-              <p></p>
             </div>
           </div>
         </div>
       </div>
-      <!--
-        <div v-for="item_tag in style.item_tags">
-          <ul class="collection">
-            <li class="collection-item avatar">
-              <i class="material-icons circle">loyalty</i> <span class="title"> {{ item_tag.name }} </span>
 
-              <div>
-                <p>
-                  <a
-                    href="#!"
-                    class="secondary-content"
-                    v-on:click="searchNearbyAPI(item_tag), setMapMarkers(stores);"
-                    data-toggle="modal"
-                    data-target="#nearbyModal"
-                  >
-                    Find Nearby <i class="material-icons">location_on</i></a
-                  >
-                  <a
-                    href="#!"
-                    class="content"
-                    v-on:click="searchOnlineAPI(item_tag);"
-                    data-toggle="modal"
-                    data-target="#onlineModal"
-                  >
-                    Find Online <i class="material-icons">redeem</i></a
-                  >
-                </p>
-              </div>
-            </li>
-          </ul>
-        </div>
-      -->
-      <!-- <div v-for="item_tag in style.item_tags"> -->
-      <!-- Button trigger modal -->
-      <!--
-        <div>
-          <button
-            v-on:click="searchOnlineAPI(item_tag);"
-            type="button"
-            class="btn btn-primary"
-            data-toggle="modal"
-            data-target="#onlineModal"
-          >
-            Find {{ item_tag.name }} online now!
-          </button>
-          <br />
-          <button
-            v-on:click="searchNearbyAPI(item_tag), setMapMarkers(stores);"
-            type="button"
-            class="btn btn-primary"
-            data-toggle="modal"
-            data-target="#nearbyModal"
-          >
-            Find {{ item_tag.name }} Near you right now!
-          </button>
-
-          <br />
-          <br />
-          <br />
-        </div>
-      -->
-      <!--
-        {{ item_tags }}
-
-        <div v-for="item_tag in item_tags">
-          <p>{{ item_tag.name }}</p>
-          <p>{{ item_tag.potential_purchases }}</p>
-
-          <a v-bind:href="'/#/Nearby' + item_tag" class="btn btn-primary">Find Nearby</a>
-          <a v-bind:href="`/#/Nearby`" class="btn btn-primary">Find Online</a>
-
-          click on the item and tag and you get a pop up (find nearby or find)
-
-
-        </div>
-      -->
-      <!-- </div> -->
     </div>
 
-
+</div>
     <!-- Online Modal Structure -->
     <div id="asos-modal" class="modal">
       <div class="modal-content">
         <h4>{{ current_item_tag.name }}</h4>
 
-            <div class="row" v-for="asos_product in asos_products" v-bind:key="asos_product.id">
-              <div class="card">
-                <img class="card-img-top" v-bind:src="asos_product.baseImageUrl" alt="Card image cap" />
-                <div class="card-body">
-                  <p class="card-title">{{ asos_product.name }}</p>
-                  <p>${{ asos_product.price.current.value }}</p>
-                  <a v-bind:href="'https://us.asos.com/{{ asos_product.url }}'" class="btn btn-primary"> Buy This!</a>
-                </div>
-              </div>
-          </div>
+
+  <div class="row" v-for="asos_product in asos_products" v-bind:key="asos_product.id">
+    <div class="col s12 m7">
+      <div class="card">
+        <div class="card-image">
+          <img v-bind:src="asos_product.baseImageUrl">
+          <span class="card-title">{{ asos_product.name }}</span>
+        </div>
+        <div class="card-content">
+
+                            <p>${{ asos_product.price.current.value }}</p>
+
+                            <a v-bind:href="'https://us.asos.com/{{ asos_product.url }}'" class="btn btn-primary"> Buy This!</a>
+                                      <i class="material-icons right">favorite_border</i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
 
       </div>
       <div class="modal-footer"><a class="modal-close waves-effect waves-green btn-flat">Close</a></div>
@@ -169,16 +106,24 @@
         <h4>{{ current_item_tag.name }}</h4>
         <p>A bunch of text</p>
         <span><div id="map"></div></span>
-        <div v-for="store in stores" v-bind:key="store.id">
-          <div class="product-card">
-            <img class="small" v-bind:src="store.products[0].image" alt="Card image cap" />
-            <div class="card-body">
-              <p class="card-title">{{ store.name }}</p>
-              <p>{{ store.products[0].title }}</p>
-              <p>{{ store.locations[0].phone }}</p>
-            </div>
-          </div>
+
+          <div class="row" v-for="store in stores" v-bind:key="store.id">
+    <div class="col s12 m7">
+      <div class="card">
+        <div class="card-image">
+          <img v-bind:src="store.products[0].image">
+          <span class="card-title black"> {{ store.products[0].title }}</span>
         </div>
+        <div class="card-content">
+                        <p>${{ store.products[0].price }}</p>
+                        <p>{{ store.name }}</p>
+              <p>{{ store.locations[0].phone }}</p>
+                <p> {{ store.locations[0].address }} <i class="material-icons right">favorite_border</i></p>
+                    
+        </div>
+      </div>
+    </div>
+  </div>
         <div class="modal-footer"><a class="modal-close waves-effect waves-green btn-flat">Close</a></div>
       </div>
     </div>
@@ -210,6 +155,11 @@ img.small {
 }
 
 div.col.s12.m6 {
+  width: 100%;
+  padding: 38px 0px 0px 0px;
+}
+
+div.col.s12.m7 {
   width: 100%;
 }
 

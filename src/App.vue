@@ -31,13 +31,43 @@
     </div>
 
     <!-- InstaWidget -->
+<div class="right">
+    <div src="https://instawidget.net/v/tag/LTKstyletip" id="link-06702a0fd52090f2bbb357fa5a4320c6faa487d2d83aba1c41df04e1ab21ffbb">
+   </div>
+
+ </div>
 
     <router-view />
   </div>
 </template>
 
 <style>
-body {
+ {
+  box-sizing: border-box;
+}
+
+/* Create two unequal columns that floats next to each other */
+.column {
+  float: left;
+  padding: 10px;
+}
+
+.left {
+  width: 75%;
+}
+
+.right {
+  width: 25%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+<body > body {
   background-color: #f5f5f5;
 }
 
@@ -69,6 +99,14 @@ div.home {
 
 label {
   padding: 0px 0px 0px 10px;
+}
+
+div#link-06702a0fd52090f2bbb357fa5a4320c6faa487d2d83aba1c41df04e1ab21ffbb {
+  margin: 40px 0px 0px 0px;
+}
+
+button {
+  margin: 14px;
 }
 </style>
 
