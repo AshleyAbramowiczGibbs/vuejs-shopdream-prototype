@@ -58,7 +58,7 @@
             Tag your style
           </a>
 
-          <a v-on:click="setCurrentStyle(style);" v-bind:href="`/#/styles/${currentStyle.id}`" class="btn btn-primary"> Buy this Look! </a>
+          <a v-on:click="setCurrentStyle(style);" v-bind:href="`/#/styles/${style.id}`" class="btn btn-primary"> Buy this Look! </a>
            <i class="material-icons right">favorite_border</i>
 
           <div>
@@ -95,7 +95,7 @@
       <!-- Item Tag Modal Structure -->
       <div id="modal-new-tag" class="modal">
         <div class="modal-content">
-          <h4>Add Your Tags to Find Your Items</h4>
+          <h4>Add Your Tags</h4>
             <ul>
               <li class="text-danger" v-for="error in errors">{{ error}}</li>
             </ul>
@@ -113,6 +113,10 @@
 </template>
 
 <style>
+div.left {
+  padding: 3% 2% 0% 0%;
+  max-width: 1000px;
+}
 i.material.icons.right {
   vertical-align: right;
 }
@@ -130,7 +134,7 @@ img.medium {
 }
 
 ul.collapsible {
-  margin: 40px 0px 20px 0px;
+  margin: 10px 0px 20px 0px;
 }
 
 div.instragram {

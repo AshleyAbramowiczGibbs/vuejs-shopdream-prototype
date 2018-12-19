@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+
     <div id="nav">
       <router-link to="/"></router-link>
       <div>
@@ -30,11 +31,14 @@
       </div>
     </div>
 
+    <div class="spacing"></div>
+
     <!-- InstaWidget -->
+
+
 <div class="right">
     <div src="https://instawidget.net/v/tag/LTKstyletip" id="link-06702a0fd52090f2bbb357fa5a4320c6faa487d2d83aba1c41df04e1ab21ffbb">
    </div>
-
  </div>
 
     <router-view />
@@ -42,10 +46,9 @@
 </template>
 
 <style>
- {
-  box-sizing: border-box;
+.spacing {
+  height: 50px;
 }
-
 /* Create two unequal columns that floats next to each other */
 .column {
   float: left;
@@ -58,6 +61,9 @@
 
 .right {
   width: 25%;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
 }
 
 /* Clear floats after the columns */
@@ -67,7 +73,7 @@
   clear: both;
 }
 
-<body > body {
+body {
   background-color: #f5f5f5;
 }
 
@@ -75,6 +81,13 @@ nav {
   background-color: #ffff;
   height: 100px;
   width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  min-width: 1000px;
+}
+
+ul.right {
+  margin: 20px;
 }
 
 a:hover {
@@ -101,8 +114,12 @@ label {
   padding: 0px 0px 0px 10px;
 }
 
-div#link-06702a0fd52090f2bbb357fa5a4320c6faa487d2d83aba1c41df04e1ab21ffbb {
+#link-06702a0fd52090f2bbb357fa5a4320c6faa487d2d83aba1c41df04e1ab21ffbb {
   margin: 40px 0px 0px 0px;
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 1rem;
+  align-self: flex-end;
 }
 
 button {

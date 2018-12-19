@@ -7,8 +7,7 @@
   "content_scripts": [
     {
       "css": ["style.css"],
-      "js": ["content.js"],
-      "matches": ["https://blog.lateral.io/*"]
+      "js": ["content.js"]
     }
   ],
 
@@ -19,6 +18,10 @@
   "permissions": [
     "activeTab",
     "https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js",
-    "http://localhost:3000/api/"
+    "http://localhost:3000/api/",
+    "contextMenus",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
   ]
 }

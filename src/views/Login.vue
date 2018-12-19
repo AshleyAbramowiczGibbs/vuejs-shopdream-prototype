@@ -17,8 +17,23 @@
         <input type="submit" class="btn btn-primary" value="Submit">
       </form>
     </div>
+      <div class="spacing-two">
+    
   </div>
+  </div>
+
+
 </template>
+
+<style>
+.login {
+  width: 75%;
+}
+
+.spacing-two {
+  height: 1000px;
+}
+</style>
 
 <script>
 import axios from "axios";
@@ -41,8 +56,7 @@ export default {
       axios
         .post("http://localhost:3000/api/sessions", params)
         .then(response => {
-          axios.defaults.headers.common["Authorization"] =
-            "Bearer " + response.data.jwt;
+          axios.defaults.headers.common["Authorization"] = "Bearer " + response.data.jwt;
           localStorage.setItem("jwt", response.data.jwt);
           this.$router.push("/");
         })

@@ -25,9 +25,15 @@
         <input type="submit" class="btn btn-primary" value="Submit">
       </form>
     </div>
+    <div class="spacing-two"></div>
   </div>
 </template>
 
+<style>
+.spacing-two {
+  height: 1000px;
+}
+</style>
 <script>
 import axios from "axios";
 

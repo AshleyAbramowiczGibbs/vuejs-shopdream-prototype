@@ -4,12 +4,19 @@
       <h3 class="title">Tags Users are Searching</h3>
       <canvas id="tagsChart"></canvas>
     </div>
+
+    <div class="spacing-two"></div>
   </div>
 </template>
 
 <style>
 h3.title {
   text-align: center;
+  padding: 20px;
+}
+
+.spacing-two {
+  height: 1000px;
 }
 </style>
 

@@ -81,11 +81,9 @@
           <span class="card-title">{{ asos_product.name }}</span>
         </div>
         <div class="card-content">
-
-                            <p>${{ asos_product.price.current.value }}</p>
-
-                            <a v-bind:href="'https://us.asos.com/{{ asos_product.url }}'" class="btn btn-primary"> Buy This!</a>
-                                      <i class="material-icons right">favorite_border</i>
+          <p>${{ asos_product.price.current.value }}</p>
+            <a v-bind:href="`https://us.asos.com/${asos_product.url}`" class="btn btn-primary" target="_blank"> Buy This!</a>
+              <i class="material-icons right">favorite_border</i>
         </div>
       </div>
     </div>
@@ -104,21 +102,21 @@
     <div id="nearby-modal" class="modal">
       <div class="modal-content">
         <h4>{{ current_item_tag.name }}</h4>
-        <p>A bunch of text</p>
         <span><div id="map"></div></span>
 
           <div class="row" v-for="store in stores" v-bind:key="store.id">
-    <div class="col s12 m7">
+    <div class="col s10 m7">
       <div class="card">
         <div class="card-image">
           <img v-bind:src="store.products[0].image">
-          <span class="card-title black"> {{ store.products[0].title }}</span>
         </div>
+        <i class="material-icons right">favorite_border</i>
         <div class="card-content">
+          <p>{{ store.products[0].title }}</p>
                         <p>${{ store.products[0].price }}</p>
                         <p>{{ store.name }}</p>
               <p>{{ store.locations[0].phone }}</p>
-                <p> {{ store.locations[0].address }} <i class="material-icons right">favorite_border</i></p>
+                <p> {{ store.locations[0].address }} </p>
                     
         </div>
       </div>
@@ -131,6 +129,9 @@
 </template>
 
 <style>
+p {
+  font-size: 24px;
+}
 #map {
   height: 500px;
   width: 100%;
@@ -143,6 +144,7 @@ img.resize {
 
 canvas.mapboxgl-canvas {
   width: 100%;
+  height: 500px;
 }
 
 img.small {
@@ -154,13 +156,21 @@ img.small {
   max-width: 100px;
 }
 
+div.col.s10.m7 {
+  width: 100%;
+}
+
 div.col.s12.m6 {
   width: 100%;
-  padding: 38px 0px 0px 0px;
+  padding: 2px 0px 0px 0px;
 }
 
 div.col.s12.m7 {
   width: 100%;
+}
+
+.modal {
+  max-width: 500px;
 }
 
 #marker {
