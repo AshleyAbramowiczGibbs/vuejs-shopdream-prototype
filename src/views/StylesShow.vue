@@ -103,7 +103,6 @@
       <div class="modal-content">
         <h4>{{ current_item_tag.name }}</h4>
         <span><div id="map"></div></span>
-
           <div class="row" v-for="store in stores" v-bind:key="store.id">
     <div class="col s10 m7">
       <div class="card">
@@ -279,7 +278,7 @@ export default {
       this.current_item_tag = item_tag;
       let params = {
         item_tag: item_tag.name,
-        distance: 10
+        distance: 20
       };
       axios
         .get("http://localhost:3000/api/nearby", { params: params })
@@ -298,16 +297,16 @@ export default {
     },
     setMapMarkers: function(stores) {
       console.log(stores);
-      this.current_stores = stores;
-      let params = {
-        lat: stores.locations.lat,
-        lng: stores.locations.lng
-      };
-      axios.get("http://localhost:3000/api/nearby", { params: params }).then(
-        function(response) {
-          this.stores = response.data;
-        }.bind(this)
-      );
+      // this.current_stores = stores;
+      // let params = {
+      //   lat: stores.locations.lat,
+      //   lng: stores.locations.lng
+      // };
+      // axios.get("http://localhost:3000/api/nearby", { params: params }).then(
+      //   function(response) {
+      //     this.stores = response.data;
+      //   }.bind(this)
+      // );
     }
   },
   computed: {}
