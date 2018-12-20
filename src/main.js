@@ -1,4 +1,5 @@
 import Vue from "vue";
+import Vue2Filters from "vue2-filters";
 import App from "./App.vue";
 import router from "./router";
 import axios from "axios";
@@ -13,6 +14,7 @@ axios.defaults.baseURL = process.env.NODE_ENV === "development" ? "http://localh
 
 Vue.config.productionTip = false;
 // .env.config();
+Vue.use(Vue2Filters);
 
 new Vue({
   router,

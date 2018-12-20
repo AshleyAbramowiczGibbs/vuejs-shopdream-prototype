@@ -4,22 +4,22 @@
 
 // const xhr = new XMLHttpRequest();
 
-var imageMenu = chrome.contextMenus.create({
-  title: "Pin It!",
-  contexts: ["image"],
-  onclick: function(info, tab) {
-    console.log(info);
-    console.log(tab);
-    var pinUrl = "http://pinterest.com/pin/create/bookmarklet/";
-    pinUrl += "?media=" + escape(info.srcUrl) + "&url=" + escape(tab.url) + "&alt=alt&title=foo"; //+ escape(tab.title);
-    pinUrl += "&is_video=false&";
-    window.open(
-      pinUrl,
-      "pin" + new Date().getTime(),
-      "status=no,resizable=no,scrollbars=yes,personalbar=no,directories=no,location=no,toolbar=no,menubar=no,width=635,height=290,left=0,top=0"
-    );
-  }
-});
+// var imageMenu = chrome.contextMenus.create({
+//   title: "Pin It!",
+//   contexts: ["image"],
+//   onclick: function(info, tab) {
+//     console.log(info);
+//     console.log(tab);
+//     var pinUrl = "http://pinterest.com/pin/create/bookmarklet/";
+//     pinUrl += "?media=" + escape(info.srcUrl) + "&url=" + escape(tab.url) + "&alt=alt&title=foo"; //+ escape(tab.title);
+//     pinUrl += "&is_video=false&";
+//     window.open(
+//       pinUrl,
+//       "pin" + new Date().getTime(),
+//       "status=no,resizable=no,scrollbars=yes,personalbar=no,directories=no,location=no,toolbar=no,menubar=no,width=635,height=290,left=0,top=0"
+//     );
+//   }
+// });
 
 document.addEventListener(
   "DOMContentLoaded",
@@ -42,7 +42,7 @@ document.addEventListener(
             axios.defaults.headers.common["Authorization"] = "Bearer " + jwt;
             // Save the style
             var params = {
-              image_url: document.getElementByName("image");
+              image_url: "https://www.lulus.com/images/product/xlarge/2954720_185074.jpg?w=560"
             };
             axios.post("http://localhost:3000/api/styles", params).then(response => {
               console.log(response.data);

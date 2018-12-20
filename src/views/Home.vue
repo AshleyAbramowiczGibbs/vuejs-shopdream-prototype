@@ -34,9 +34,7 @@
       </ul>
     </div>
 
-    <!-- InstaWidget -->
-
-    <div v-for="style in styles">
+    <div v-for="style in orderBy(styles, 'id', -1)">
       <div class="card">
         <div class="card-image waves-effect waves-block waves-light">
           <img class="activator" v-bind:src="style.image ? style.image : style.image_url" />
@@ -118,7 +116,7 @@ div.left {
   max-width: 1000px;
 }
 i.material.icons.right {
-  vertical-align: right;
+  position: right;
 }
 
 a.waves-effect {
@@ -154,7 +152,9 @@ button.btn-primary {
 <script>
 /* global M */
 let axios = require("axios");
+import Vue2Filters from "vue2-filters";
 export default {
+  mixins: [Vue2Filters.mixin],
   data: function() {
     return {
       message: "Welcome to Shop.Dream!",
