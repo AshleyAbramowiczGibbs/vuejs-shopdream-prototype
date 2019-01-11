@@ -213,7 +213,7 @@ export default {
     // axios.get("http://localhost:3000/api/item_tags/").then(response => {
     //   this.item_tags = response.data;
     // });
-    axios.get("http://localhost:3000/api/styles/" + this.$route.params.id).then(response => {
+    axios.get("https://intense-earth-34277.herokuapp.com/api/styles/" + this.$route.params.id).then(response => {
       this.style = response.data;
     });
     // var params = {
@@ -258,7 +258,7 @@ export default {
         item_tag: item_tag.name
       };
       axios
-        .get("http://localhost:3000/api/asos_products", { params: params })
+        .get("https://intense-earth-34277.herokuapp.com/api/asos_products", { params: params })
         .then(
           function(response) {
             console.log(response);
@@ -281,7 +281,7 @@ export default {
         distance: 20
       };
       axios
-        .get("http://localhost:3000/api/nearby", { params: params })
+        .get("https://intense-earth-34277.herokuapp.com/api/nearby", { params: params })
         .then(
           function(response) {
             console.log(response);

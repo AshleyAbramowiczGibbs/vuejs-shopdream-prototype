@@ -32,7 +32,7 @@ export default {
   created: function() {},
   method: function() {},
   mounted: function() {
-    axios.get("http://localhost:3000/api/item_tags").then(
+    axios.get("https://intense-earth-34277.herokuapp.com/api/item_tags").then(
       function(response) {
         this.item_tags = response.data;
       }.bind(this)
