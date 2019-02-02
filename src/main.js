@@ -10,7 +10,8 @@ if (jwt) {
   axios.defaults.headers.common["Authorization"] = "Bearer " + jwt;
 }
 
-axios.defaults.baseURL = process.env.NODE_ENV === "development" ? "http://localhost:3000" : "/";
+axios.defaults.baseURL =
+  process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://intense-earth-34277.herokuapp.com/";
 
 Vue.config.productionTip = false;
 // .env.config();

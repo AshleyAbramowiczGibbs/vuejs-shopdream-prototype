@@ -50,7 +50,8 @@
   </div>
 </template>
 
-<style></style>
+<style>
+</style>
 
 <script>
 let axios = require("axios");
@@ -65,7 +66,7 @@ export default {
     };
   },
   created: function() {
-    axios.get("http://localhost:3000/api/styles").then(
+    axios.get("https://intense-earth-34277.herokuapp.com/api/styles").then(
       function(response) {
         console.log(response.data);
         this.styles = response.data;
@@ -82,7 +83,7 @@ export default {
         style_id: style.id
       };
       axios
-        .post("http://localhost:3000/api/item_tags", params)
+        .post("https://intense-earth-34277.herokuapp.com/api/item_tags", params)
         .then(
           function(response) {
             console.log(response);
@@ -103,7 +104,7 @@ export default {
         image_url: this.newStyleImage
       };
       axios
-        .post("http://localhost:3000/api/styles", params)
+        .post("https://intense-earth-34277.herokuapp.com/api/styles", params)
         .then(
           function(response) {
             console.log(response);
